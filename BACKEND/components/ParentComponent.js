@@ -4,8 +4,8 @@ import Header from "./Header";
 function ParentComponent(props) {
   return (
     <div>
-      <Header />
-      <Aside />
+      <Header handleAsideOpen={props.appAsideOpen} />
+      <Aside asideOpen={props.appOpen} handleAsideOpen={props.appAsideOpen} />
     </div>
   );
 }

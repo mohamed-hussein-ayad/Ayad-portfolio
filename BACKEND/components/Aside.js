@@ -9,7 +9,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function Aside() {
+export default function Aside({ asideOpen, handleAsideOpen }) {
   const router = useRouter();
 
   const [clicked, setClicked] = useState(false);
@@ -30,7 +30,7 @@ export default function Aside() {
 
   return (
     <>
-      <aside className="asideleft active">
+      <aside className={asideOpen ? "asideleft active" : "asideleft"}>
         <ul>
           <Link href="/">
             <li className="navactive">
@@ -52,13 +52,13 @@ export default function Aside() {
             </div>
             {activeLink === "/blogs" && (
               <ul>
-                <Link href="/">
+                <Link href="/blogs">
                   <li>All Blogs</li>
                 </Link>
-                <Link href="/">
+                <Link href="/blogs/draft">
                   <li>Draft Blogs</li>
                 </Link>
-                <Link href="/">
+                <Link href="/blogs/addblog">
                   <li>Add Blog</li>
                 </Link>
               </ul>
@@ -78,13 +78,13 @@ export default function Aside() {
             </div>
             {activeLink === "/projects" && (
               <ul>
-                <Link href="/">
+                <Link href="/projects">
                   <li>All Projects</li>
                 </Link>
-                <Link href="/">
+                <Link href="/projects/draftprojects">
                   <li>Draft Projects</li>
                 </Link>
-                <Link href="/">
+                <Link href="/projects/addproject">
                   <li>Add Project</li>
                 </Link>
               </ul>
@@ -104,13 +104,13 @@ export default function Aside() {
             </div>
             {activeLink === "/shops" && (
               <ul>
-                <Link href="/">
+                <Link href="/shops">
                   <li>All Products</li>
                 </Link>
-                <Link href="/">
+                <Link href="/shops/draftshop">
                   <li>Draft Products</li>
                 </Link>
-                <Link href="/">
+                <Link href="/shops/addproduct">
                   <li>Add Product</li>
                 </Link>
               </ul>
@@ -130,10 +130,10 @@ export default function Aside() {
             </div>
             {activeLink === "/gallery" && (
               <ul>
-                <Link href="/">
+                <Link href="/gallery">
                   <li>All Photos</li>
                 </Link>
-                <Link href="/">
+                <Link href="/gallery/addphoto">
                   <li>Add Photo</li>
                 </Link>
               </ul>
@@ -158,6 +158,7 @@ export default function Aside() {
             </li>
           </Link>
         </ul>
+        <button className="logoutbtn">Logout</button>
       </aside>
     </>
   );
