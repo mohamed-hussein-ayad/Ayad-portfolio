@@ -9,18 +9,27 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { ReactSortable } from "react-sortablejs";
 
-export default function Blog({ _id }) {
+export default function Blog({
+  _id,
+  title: existingTitle,
+  slug: existingSlug,
+  images: existingImages,
+  description: existingDescription,
+  blogcategory: existingBlogcategory,
+  tags: existingTags,
+  status: existingStatus,
+}) {
   const [redirect, setRedirect] = useState(false);
 
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
-  const [images, setImages] = useState([]);
-  const [description, setDescription] = useState("");
-  const [blogcategory, setBlogcategory] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [status, setStatus] = useState("");
+  const [title, setTitle] = useState(existingTitle || "");
+  const [slug, setSlug] = useState(existingSlug || "");
+  const [images, setImages] = useState(existingImages || []);
+  const [description, setDescription] = useState(existingDescription || "");
+  const [blogcategory, setBlogcategory] = useState(existingBlogcategory || []);
+  const [tags, setTags] = useState(existingTags || []);
+  const [status, setStatus] = useState(existingStatus || "");
 
   // for images uploading
   const [isUploading, setIsUploading] = useState(false);
