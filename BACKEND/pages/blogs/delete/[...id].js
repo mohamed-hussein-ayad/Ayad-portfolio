@@ -47,7 +47,7 @@ export default function DeleteProduct() {
           </div>
           <div className="breadcrumb">
             <BsPostcard />
-            <span>/</span> <span>Edit Blog</span>
+            <span>/</span> <span>Delete Blog</span>
           </div>
         </div>
         <div className="deletesec flex flex-center wh_100">
