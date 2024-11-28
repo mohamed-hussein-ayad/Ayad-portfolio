@@ -57,12 +57,12 @@ export default function Projects() {
           </div>
           <div className="breadcrumb">
             <FaBloggerB />
-            <span>/</span> <span>Blogs</span>
+            <span>/</span> <span>Projects</span>
           </div>
         </div>
         <div className="blogstable">
           <div className="flex gap-2 mb-1">
-            <h2>Search Blogs</h2>
+            <h2>Search Projects</h2>
             <input
               value={searchQuery}
               onChange={(ev) => setSearchQuery(ev.target.value)}

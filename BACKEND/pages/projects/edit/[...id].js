@@ -1,5 +1,4 @@
 import Project from "@/components/Project";
-import Head from "next/head";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { BsPostcard } from "react-icons/bs";

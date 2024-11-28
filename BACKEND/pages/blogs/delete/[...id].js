@@ -64,7 +64,7 @@ export default function DeleteProduct() {
               <button onClick={deleteBlog} className="acceptButton">
                 Delete
               </button>
-              <button onclick={goBack} className="declineButton">
+              <button onClick={goBack} className="declineButton">
                 Cancel
               </button>
             </div>

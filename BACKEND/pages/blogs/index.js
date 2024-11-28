@@ -40,10 +40,10 @@ export default function Blogs() {
   // get the current page's blogs
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexofLastBlog);
   const publishedBlogs = currentBlogs.filter((ab) => ab.status === "publish");
-  const pageNumber = [];
+  const pageNumbers = [];
 
-  for (let i = 1; i < -Math.ceil(allblog / perPage); i++) {
-    pageNumber.push(i);
+  for (let i = 1; i <= Math.ceil(allblog / perPage); i++) {
+    pageNumbers.push(i);
   }
   return (
     <>
@@ -126,6 +126,38 @@ export default function Blogs() {
               )}
             </tbody>
           </table>
+          {publishedBlogs.length === 0 ? (
+            ""
+          ) : (
+            <div className="blogpagination">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              {pageNumbers
+                .slice(
+                  Math.max(currentPage - 3, 0),
+                  Math.min(currentPage + 2, pageNumbers.length)
+                )
+                .map((number) => (
+                  <button
+                    key={number}
+                    onClick={() => paginate(number)}
+                    className={`${currentPage === number ? "active" : ""}`}
+                  >
+                    {number}
+                  </button>
+                ))}
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentBlogs.length < perPage}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
