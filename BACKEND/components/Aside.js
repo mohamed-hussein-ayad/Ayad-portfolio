@@ -148,10 +148,10 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
               <span>Contacts</span>
             </li>
           </Link>
-          <Link href="/Setting">
+          <Link href="/setting">
             <li
-              className={activeLink === "/Setting" ? "navactive" : ""}
-              onClick={() => handleLinkClick("/Setting")}
+              className={activeLink === "/setting" ? "navactive" : ""}
+              onClick={() => handleLinkClick("/setting")}
             >
               <IoSettingsOutline />
               <span>Settings</span>
