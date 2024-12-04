@@ -48,18 +48,18 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/blogs");
-        // const responseproject = await fetch("/api/projects");
-        // const responseShop = await fetch("/api/shops");
-        // const responseGallery = await fetch("/api/photos");
+        const responseproject = await fetch("/api/projects");
+        const responseShop = await fetch("/api/shops");
+        const responseGallery = await fetch("/api/photos");
         const data = await response.json();
-        // const dataProject = await responseproject.json();
-        // const dataShop = await responseShop.json();
-        // const dataPhotos = await responseGallery.json();
+        const dataProject = await responseproject.json();
+        const dataShop = await responseShop.json();
+        const dataPhotos = await responseGallery.json();
 
         setBlogData(data); // assuming data is an array of blog objects
-        // setProjectData(dataProject);
-        // setShopData(dataShop);
-        // setPhotoData(dataPhotos);
+        setProjectData(dataProject);
+        setShopData(dataShop);
+        setPhotoData(dataPhotos);
         setLoading(false); // after fetching data make loading false
       } catch (error) {
         setLoading(false);
@@ -140,15 +140,19 @@ export default function Home() {
           </div>
           <div className="four_card">
             <h2>Total Projects</h2>
-            <span>5</span>
+            <span>
+              {projectData.filter((dat) => dat.status === "publish").length}
+            </span>
           </div>
           <div className="four_card">
             <h2>Total Products</h2>
-            <span>5</span>
+            <span>
+              {shopData.filter((dat) => dat.status === "publish").length}
+            </span>
           </div>
           <div className="four_card">
             <h2>Gallery Photos</h2>
-            <span>5</span>
+            <span>{photosData.length}</span>
           </div>
         </div>
 
