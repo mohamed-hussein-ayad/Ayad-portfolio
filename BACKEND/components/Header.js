@@ -2,6 +2,7 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdOutlineFullscreenExit } from "react-icons/md";
 import { GoScreenFull } from "react-icons/go";
 import { useState } from "react";
+import LoginLayout from "./LoginLayout";
 
 export default function Header({ handleAsideOpen }) {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -20,6 +21,7 @@ export default function Header({ handleAsideOpen }) {
 
   return (
     <>
+      {/* <LoginLayout> */}
       <header className="header flex flex-sb">
         <div className="logo flex gap-2">
           <h1>ADMIN</h1>
@@ -39,6 +41,7 @@ export default function Header({ handleAsideOpen }) {
           </div>
         </div>
       </header>
+      {/* </LoginLayout> */}
     </>
   );
 }
