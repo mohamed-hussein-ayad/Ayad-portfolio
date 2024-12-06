@@ -92,7 +92,7 @@
 export default function signup() {
   return (
     <>
-      <h1>You don not have permision to signup to this admin dashboard</h1>
+      <h1>You don't have a permision to signup to this Admin Dashboard</h1>
     </>
   );
 }

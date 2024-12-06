@@ -102,7 +102,7 @@ export default function signin() {
                 {error && <p className="redcolor">{error}</p>}
               </form>
               <span className="agreement">
-                <a target="_blank" href="">
+                <a target="_blank" href="https://www.instagram.com/memoayad9/">
                   Learn Admin licence agreement
                 </a>
               </span>
