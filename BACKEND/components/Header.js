@@ -2,7 +2,7 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { MdOutlineFullscreenExit } from "react-icons/md";
 import { GoScreenFull } from "react-icons/go";
 import { useState } from "react";
-import LoginLayout from "./LoginLayout";
+import { useSession } from "next-auth/react";
 
 export default function Header({ handleAsideOpen }) {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -18,16 +18,21 @@ export default function Header({ handleAsideOpen }) {
       });
     }
   };
+  const { data: session } = useSession();
 
   return (
     <>
-      {/* <LoginLayout> */}
       <header className="header flex flex-sb">
         <div className="logo flex gap-2">
           <h1>ADMIN</h1>
-          <div className="headerham flex flex-center" onClick={handleAsideOpen}>
-            <RiBarChartHorizontalLine />
-          </div>
+          {session ? (
+            <div
+              className="headerham flex flex-center"
+              onClick={handleAsideOpen}
+            >
+              <RiBarChartHorizontalLine />
+            </div>
+          ) : null}
         </div>
         <div className="rightnav flex gap-2">
           <div onClick={toggleFullScreen}>
@@ -41,7 +46,6 @@ export default function Header({ handleAsideOpen }) {
           </div>
         </div>
       </header>
-      {/* </LoginLayout> */}
     </>
   );
 }

@@ -1,19 +1,22 @@
 // pages/auth/signin.js
 "use client";
-import { signIn } from "next-auth/react";
+import Spinner from "@/components/Spinner";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function () {
+export default function signin() {
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-
   const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,31 +55,59 @@ export default function () {
       }, 4000);
     }
   };
+
+  if (status === "loading") {
+    return (
+      <div className="flex flex-center wh_100">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="flex flex-center full-h">
         <div className="loginform">
           <div className="heading">Sign In</div>
-          <form className="form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              className="input"
-              placeholder="Enter email Address"
-            />
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              className="input"
-              placeholder="Password"
-            />
-            <button className="login-button" type="submit">
-              login
-            </button>
-            {error && <p>{error}</p>}
-          </form>
+          {loading ? (
+            <div className="flex flex-center w-100 flex-col">
+              <Spinner /> Checking...
+            </div>
+          ) : (
+            <>
+              <form className="form" onSubmit={handleSubmit}>
+                <input
+                  required
+                  className="input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="E-mail"
+                />
+                <input
+                  required
+                  className="input"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                />
+                <button className="login-button" type="submit" value="Login">
+                  login
+                </button>
+                {error && <p className="redcolor">{error}</p>}
+              </form>
+              <span className="agreement">
+                <a target="_blank" href="">
+                  Learn Admin licence agreement
+                </a>
+              </span>
+            </>
+          )}
         </div>
       </div>
     </>
