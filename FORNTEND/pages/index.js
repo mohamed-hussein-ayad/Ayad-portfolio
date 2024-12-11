@@ -2,11 +2,13 @@ import Head from "next/head";
 import Link from "next/link";
 import { BiDownload } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
-import { FaFacebookF, FaInstagram } from "react-icons/fa6";
+import { FaCalendarDays, FaFacebookF, FaInstagram } from "react-icons/fa6";
 import { GrLinkedinOption } from "react-icons/gr";
 import { GoArrowUpRight } from "react-icons/go";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
+import { LuMedal } from "react-icons/lu";
+import { PiGraduationCap } from "react-icons/pi";
 
 export default function Home() {
   // acitve service background color
@@ -47,17 +49,22 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [alldata, setAlldata] = useState([]);
   const [allwork, setAllwork] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [projectResponse, blogsResponse] = await Promise.all([
           fetch("/api/projects"),
+          fetch("/api/blogs"),
         ]);
 
         const projectData = await projectResponse.json();
+        const blogData = await blogsResponse.json();
 
         setAlldata(projectData);
+        setAllwork(blogData);
       } catch (error) {
         console.log("Error Fetching Data", error);
       } finally {
@@ -67,6 +74,43 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // filter projects based on selectedCategory
+    if (selectedCategory === "All") {
+      setFilteredProjects(alldata.filter((pro) => pro.status === "publish"));
+    } else {
+      setFilteredProjects(
+        alldata.filter(
+          (pro) =>
+            pro.status === "publish" &&
+            pro.projectcategory[0] === selectedCategory
+        )
+      );
+    }
+  }, [selectedCategory, alldata]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // function to format the date
+
+  const formatDate = (date) => {
+    // check if date is valid
+    if (!date || isNaN(date)) {
+      return "";
+    }
+
+    const options = {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour12: true,
+    };
+
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  };
 
   return (
     <>
@@ -208,16 +252,42 @@ export default function Home() {
             <p>give me a small description in this place</p>
           </div>
           <div className="project_buttons">
-            <button>All</button>
-            <button>Website</button>
-            <button>Apps</button>
-            <button>UI/UX</button>
+            <button
+              className={selectedCategory === "All" ? "active" : ""}
+              onClick={() => setSelectedCategory("All")}
+            >
+              All
+            </button>
+            <button
+              className={
+                selectedCategory === "Website Development" ? "active" : ""
+              }
+              onClick={() => setSelectedCategory("Website Development")}
+            >
+              Website
+            </button>
+            <button
+              className={selectedCategory === "App Development" ? "active" : ""}
+              onClick={() => setSelectedCategory("App Development")}
+            >
+              Apps
+            </button>
+            <button
+              className={selectedCategory === "Design System" ? "active" : ""}
+              onClick={() => setSelectedCategory("Design System")}
+            >
+              Design System
+            </button>
           </div>
           <div className="projects_cards">
             {loading ? (
-              <Spinner />
+              <div className="flex flex-center wh_50">
+                <Spinner />
+              </div>
+            ) : filteredProjects.length === 0 ? (
+              <h1 className="w-100 flex flex-center mt-3">No Projects Found</h1>
             ) : (
-              alldata.slice(0, 4).map((pro) => (
+              filteredProjects.slice(0, 4).map((pro) => (
                 <Link href="/" key={pro._id} className="procard">
                   <div className="proimgbox">
                     <img src={pro.images[0]} alt={pro.title} />
@@ -234,13 +304,140 @@ export default function Home() {
       </section>
 
       {/* Experience study */}
-      <section className="exstudy"></section>
+      <section className="exstudy">
+        <div className="container flex flex-left flex-sb">
+          <div className="experience">
+            <div className="experience_title flex gap-1">
+              <LuMedal />
+              <h2>My Experience</h2>
+            </div>
+            <div className="exper_cards">
+              <div className="exper_card">
+                <span>2023 - Present</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2022 - 2023</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2021 - 2022</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2020 - 2021</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+            </div>
+          </div>
+          <div className="education">
+            <div className="experience_title flex gap-1">
+              <PiGraduationCap />
+              <h2>My Education</h2>
+            </div>
+            <div className="exper_cards">
+              <div className="exper_card">
+                <span>2023 - Present</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2022 - 2023</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2021 - 2022</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+              <div className="exper_card">
+                <span>2020 - 2021</span>
+                <h3>DVTECH IT</h3>
+                <p>Full Stack web Developer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* My Skills */}
-      <section className="myskills"></section>
+      <section className="myskills">
+        <div className="container">
+          <div className="myskills_title">
+            <h2>My Skills</h2>
+            <p>Put a small title here so you can show everything in breif</p>
+          </div>
+          <div className="myskils_cards">
+            <div className="mys_card">
+              <div className="mys_inner">
+                <img src="/img/python.svg" alt="python" />
+                <p className="text-center">Python</p>
+              </div>
+            </div>
+            <div className="mys_card">
+              <div className="mys_inner">
+                <img src="/img/python.svg" alt="python" />
+                <p className="text-center">Python</p>
+              </div>
+            </div>
+            <div className="mys_card">
+              <div className="mys_inner">
+                <img src="/img/python.svg" alt="python" />
+                <p className="text-center">Python</p>
+              </div>
+            </div>
+            <div className="mys_card">
+              <div className="mys_inner">
+                <img src="/img/python.svg" alt="python" />
+                <p className="text-center">Python</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Recent Blogs */}
-      <section className="recentblogs"></section>
+      <section className="recentblogs">
+        <div className="container">
+          <div className="myskills_title">
+            <h2>Recent Blogs</h2>
+            <p>put a small description here if you want sir</p>
+          </div>
+          <div className="recent_blogs">
+            {allwork.slice(0, 3).map((blog) => {
+              return (
+                <Link
+                  href={`/blogs/${blog.slug}`}
+                  key={blog._id}
+                  className="re_blog"
+                >
+                  <div className="re_blogimg">
+                    <img
+                      src={blog.images[0] || "/img/noimage.png"}
+                      alt={blog.title}
+                    />
+                    <span>{blog.blogcategory}</span>
+                  </div>
+                  <div className="re_bloginfo">
+                    <div className="re_topdate flex gap-1">
+                      <div className="res_date">
+                        <FaCalendarDays />{" "}
+                        <span>{formatDate(new Date(blog.createdAt))}</span>
+                      </div>
+                    </div>
+                    <h2>{blog.title}</h2>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

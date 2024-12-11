@@ -9,6 +9,7 @@ const BlogSchema = new Schema(
     blogcategory: [{ type: String }],
     tags: [{ type: String }],
     status: { type: String },
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     timestamps: true, // this will automatucally manage createAt and updateAt
