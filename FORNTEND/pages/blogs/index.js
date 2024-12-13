@@ -195,6 +195,69 @@ export default function blogs() {
             </div>
           </div>
         </section>
+        <div className="latestpostsec">
+          <div className="contatiner">
+            <div className="border"></div>
+            <div className="latestpostsdata">
+              <div className="fatitle">
+                <h3>Latest Articles</h3>
+              </div>
+              <div className="latestposts">
+                {loading ? (
+                  <div className="flex flex-center wh_50">
+                    <Spinner />
+                  </div>
+                ) : (
+                  <>
+                    {publishedData.map((blog) => {
+                      return (
+                        <div className="lpost" key={blog._id}>
+                          <div className="lpostimg">
+                            <Link href={`/blogs/${blog.slug}`}>
+                              <img src={blog.images[0]} alt={blog.title} />
+                            </Link>
+                            <div className="tegs">
+                              {blog.blogcategory.map((cat) => {
+                                return (
+                                  <Link
+                                    href={`/blog/category${cat}`}
+                                    className="ai"
+                                  >
+                                    <span></span>
+                                    {cat}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          <div className="lpostinfo">
+                            <h3>
+                              <Link href={`/blogs/${blog.slug}`}>
+                                {blog.title}
+                              </Link>
+                            </h3>
+                            <p>
+                              Lorem, ipsum dolor sit amet consectetur
+                              adipisicing elit. Voluptatum aspernatur non
+                              maiores magni quibusdam dignissimos adipisci,
+                              accusamus alias quas tempora consectetur
+                              reiciendis. Id quasi ab eveniet animi aliquam
+                              optio accusamus!
+                            </p>
+                            <h4 className="flex">
+                              <img src="/img/coder.jpg" alt="" />
+                              By mohamed Ayad
+                            </h4>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
