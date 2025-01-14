@@ -196,7 +196,7 @@ export default function blogs() {
           </div>
         </section>
         <div className="latestpostsec">
-          <div className="contatiner">
+          <div className="container">
             <div className="border"></div>
             <div className="latestpostsdata">
               <div className="fatitle">
@@ -256,6 +256,38 @@ export default function blogs() {
                 )}
               </div>
             </div>
+            {publishedData.length === 0 ? (
+              ""
+            ) : (
+              <div className="blogspaginationbtn flex flex-center mt-3">
+                <button
+                  onClick={() => paginate(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                {pageNumbers
+                  .slice(
+                    Math.max(currentPage - 3, 0),
+                    Math.min(currentPage + 2, pageNumbers.length)
+                  )
+                  .map((number) => (
+                    <button
+                      key={number}
+                      onClick={() => paginate(number)}
+                      className={`${currentPage === number ? "active" : ""}`}
+                    >
+                      {number}
+                    </button>
+                  ))}
+                <button
+                  onClick={() => paginate(currentPage + 1)}
+                  disabled={currentBlogs.length < perPage}
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
