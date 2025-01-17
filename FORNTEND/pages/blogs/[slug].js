@@ -546,6 +546,89 @@ const BlogPage = () => {
                       <FiSearch />
                     </button>
                   </div>
+                  <div className="rightslugcategory">
+                    <h2>CATEGORIES</h2>
+                    <ul>
+                      <Link href="/blog/category/Javascript">
+                        <li>
+                          Javascript{" "}
+                          <span>
+                            (
+                            {
+                              alldata.filter(
+                                (ab) => ab.blogcategory[0] === "Javascript"
+                              ).length
+                            }
+                            )
+                          </span>
+                        </li>
+                      </Link>
+                      <Link href="/blog/category/Next Js">
+                        <li>
+                          Next Js{" "}
+                          <span>
+                            (
+                            {
+                              alldata.filter(
+                                (ab) => ab.blogcategory[0] === "Next Js"
+                              ).length
+                            }
+                            )
+                          </span>
+                        </li>
+                      </Link>
+                      <Link href="/blog/category/Next Js">
+                        <li>
+                          Next Js{" "}
+                          <span>
+                            (
+                            {
+                              alldata.filter(
+                                (ab) => ab.blogcategory[0] === "Next Js"
+                              ).length
+                            }
+                            )
+                          </span>
+                        </li>
+                      </Link>
+                      <Link href="/blog/category/Next Js">
+                        <li>
+                          Next Js{" "}
+                          <span>
+                            (
+                            {
+                              alldata.filter(
+                                (ab) => ab.blogcategory[0] === "Next Js"
+                              ).length
+                            }
+                            )
+                          </span>
+                        </li>
+                      </Link>
+                    </ul>
+                  </div>
+                  <div className="rightrecentpost">
+                    <h2>RECENT POST</h2>
+                    {alldata.slice(0, 3).map((blog) => {
+                      return (
+                        <Link
+                          key={blog._id}
+                          href={`/blog/${blog.slug}`}
+                          className="rightrecentp"
+                        >
+                          <img src={blog.images[0]} alt="" />
+                          <div>
+                            <h3>{blog.title}</h3>
+                            <h4 className="mt-1">
+                              {blog.tags.map((cat) => {
+                                return <span key={cat}>{cat}</span>;
+                              })}
+                            </h4>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
