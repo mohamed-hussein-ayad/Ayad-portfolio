@@ -11,11 +11,22 @@ import "swiper/css/pagination";
 import { FreeMode } from "swiper/modules";
 import Head from "next/head";
 import Spinner from "@/components/Spinner";
+import Blogsearch from "@/components/Blogsearch";
 
 export default function blogs() {
   // pagination
   const [currentPage, setCurrentPage] = useState(1); // for page 1
   const [perPage] = useState(7);
+
+  const [searchInput, setSearchInput] = useState(false);
+
+  const handleSearchOpen = () => {
+    setSearchInput(!searchInput);
+  };
+
+  const handleSearchClose = () => {
+    setSearchInput(false);
+  };
 
   // search
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,7 +80,11 @@ export default function blogs() {
                 <p>I write about web development and about the modern tech</p>
                 <div className="subemail">
                   <form className="flex">
-                    <input type="text" placeholder="Search here..." />
+                    <input
+                      onClick={handleSearchOpen}
+                      type="text"
+                      placeholder="Search here..."
+                    />
                     <button>Search</button>
                   </form>
                 </div>
@@ -195,7 +210,7 @@ export default function blogs() {
             </div>
           </div>
         </section>
-        <div className="latestpostsec">
+        <section className="latestpostsec">
           <div className="container">
             <div className="border"></div>
             <div className="latestpostsdata">
@@ -289,7 +304,8 @@ export default function blogs() {
               </div>
             )}
           </div>
-        </div>
+          {searchInput ? <Blogsearch cls={handleSearchClose} /> : null}
+        </section>
       </div>
     </>
   );

@@ -36,7 +36,7 @@ export default function contact() {
 
     try {
       await axios.post("/api/contacts", data);
-      setMessageOk("message sent successfully");
+      setMessageOk("✅message sent successfully");
 
       // reset all form fields
       setName("");
@@ -56,7 +56,7 @@ export default function contact() {
       } else {
         console.error("error", error.message);
       }
-      setMessageOk("failed to send message");
+      setMessageOk("❌failed to send message");
     }
   }
 
@@ -237,6 +237,24 @@ export default function contact() {
                       <label htmlFor={priceRange}>{priceRange}</label>
                     </div>
                   ))}
+                </div>
+                <div className="rightconttitle">
+                  <h2>Tell me about your project</h2>
+                </div>
+                <div className="rightcontpera">
+                  <textarea
+                    value={description}
+                    name="description"
+                    onchange={(ev) => setDescription(ev.target.value)}
+                    rows={4}
+                    id=""
+                    placeholder="Project Description"
+                  ></textarea>
+                </div>
+                <hr />
+                <div className="rightcontsbtn flex gap-3">
+                  <button type="submit">Submit</button>
+                  <p>{messageOk}</p>
                 </div>
               </form>
             </div>

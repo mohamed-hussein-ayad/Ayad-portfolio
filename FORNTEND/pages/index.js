@@ -138,13 +138,24 @@ export default function Home() {
         <div className="container">
           <div className="flex w-100">
             <div className="heroinfoleft">
-              <span className="hero_sb_title">I am Mohamed</span>
-              <h1 className="hero_title">Web Developer</h1>
-              <div className="hero_img_box heroimgbox">
+              <span className="hero_sb_title" data-aos="fade-right">
+                I am Mohamed
+              </span>
+              <h1 className="hero_title" data-aos="fade-right">
+                Web Developer
+              </h1>
+              <div
+                className="hero_img_box heroimgbox"
+                data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000"
+              >
                 <img src="/img/me.jpg" alt="Mohamed ayad" />
               </div>
-              <div className="lead">A small description about me</div>
-              <div className="hero_btn_box">
+              <div className="lead" data-aos="fade-up">
+                A small description about me
+              </div>
+              <div className="hero_btn_box" data-aos="fade-up">
                 <Link
                   href="/"
                   download={"/img/resume.pdf"}
@@ -179,31 +190,36 @@ export default function Home() {
 
             {/* right side image section and you can edit the dark mode on the global style file */}
             <div className="heroimageright">
-              <div className="hero_img_box">
+              <div
+                className="hero_img_box"
+                data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000"
+              >
                 <img src="/img/me.png" alt="Mohamed Ayad" />
               </div>
             </div>
           </div>
           <div className="funfect_area flex flex_">
-            <div className="funfect_item">
+            <div className="funfect_item" data-aos="flip-right">
               <h3>7+</h3>
               <h4>
                 Year of <br /> Experience
               </h4>
             </div>
-            <div className="funfect_item">
+            <div className="funfect_item" data-aos="flip-right">
               <h3>20+</h3>
               <h4>
                 Projects <br /> Complated
               </h4>
             </div>
-            <div className="funfect_item">
+            <div className="funfect_item" data-aos="flip-left">
               <h3>12+</h3>
               <h4>
                 OpenSource <br /> Library
               </h4>
             </div>
-            <div className="funfect_item">
+            <div className="funfect_item" data-aos="flip-left">
               <h3>25+</h3>
               <h4>
                 Happy <br /> Clints
