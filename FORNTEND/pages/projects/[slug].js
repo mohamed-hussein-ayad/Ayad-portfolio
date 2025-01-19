@@ -154,11 +154,11 @@ export default function projectslug() {
                 className="mySwiper"
               >
                 {alldata &&
-                  alldata[0]?.images.map((image, index) => {
+                  alldata[0]?.images.map((image, index) => (
                     <SwiperSlide key={index}>
                       <img src={image} alt="project" />
-                    </SwiperSlide>;
-                  })}
+                    </SwiperSlide>
+                  ))}
               </Swiper>
             </div>
           </div>
